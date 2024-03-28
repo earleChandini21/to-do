@@ -1,0 +1,407 @@
+<!DOCTYPE html> 
+
+<html> 
+
+<head> 
+
+<meta name=”viewport” content=”width=device-width, initial-scale=1”> 
+
+<style> 
+
+Body { 
+
+  Margin: 0; 
+
+  Min-width: 250px; 
+
+} 
+
+ 
+
+/* Include the padding and border in an element’s total width and height */ 
+
+{ 
+
+  Box-sizing: border-box; 
+
+} 
+
+ 
+
+/* Remove margins and padding from the list */ 
+
+Ul { 
+
+  Margin: 0; 
+
+  Padding: 0; 
+
+} 
+
+ 
+
+/* Style the list items */ 
+
+Ul li { 
+
+  Cursor: pointer; 
+
+  Position: relative; 
+
+  Padding: 10px 6px 10px 20px; 
+
+  List-style-type: none; 
+
+  Background: #eee; 
+
+  Font-size: 18px; 
+
+  Transition: 0.2s; 
+
+   
+
+  /* make the list items unselectable */ 
+
+  -webkit-user-select: none; 
+
+  -moz-user-select: none; 
+
+  -ms-user-select: none; 
+
+  User-select: none; 
+
+} 
+
+ 
+
+/* Set all odd list items to a different color (zebra-stripes) */ 
+
+Ul li:nth-child(odd) { 
+
+  Background: #f9f9f9; 
+
+} 
+
+ 
+
+/* Darker background-color on hover */ 
+
+Ul li:hover { 
+
+  Background: #ddd; 
+
+} 
+
+ 
+
+/* When clicked on, add a background color and strike out text */ 
+
+Ul li.checked { 
+
+  Background: #888; 
+
+  Color: #fff; 
+
+  Text-decoration: line-through; 
+
+} 
+
+ 
+
+/* Add a “checked” mark when clicked on */ 
+
+Ul li.checked::before { 
+
+  Content: ‘’; 
+
+  Position: absolute; 
+
+  Border-color: #fff; 
+
+  Border-style: solid; 
+
+  Border-width: 0 2px 2px 0; 
+
+  Top: 10px; 
+
+  Left: 16px; 
+
+  Transform: rotate(45deg); 
+
+  Height: 15px; 
+
+  Width: 7px; 
+
+} 
+
+ 
+
+/* Style the close button */ 
+
+.close { 
+
+  Position: absolute; 
+
+  Right: 0; 
+
+  Top: 0; 
+
+  Padding: 12px 16px 12px 16px; 
+
+} 
+
+ 
+
+.close:hover { 
+
+  Background-color: #f44336; 
+
+  Color: white; 
+
+} 
+
+ 
+
+/* Style the header */ 
+
+.header { 
+
+  Background-color: #f44336; 
+
+  Padding: 30px 40px; 
+
+  Color: white; 
+
+  Text-align: center; 
+
+} 
+
+ 
+
+/* Clear floats after the header */ 
+
+.header:after { 
+
+  Content: “”; 
+
+  Display: table; 
+
+  Clear: both; 
+
+} 
+
+ 
+
+/* Style the input */ 
+
+Input { 
+
+  Margin: 0; 
+
+  Border: none; 
+
+  Border-radius: 0; 
+
+  Width: 55%; 
+
+  Padding: 10px; 
+
+  Float: left; 
+
+  Font-size: 16px; 
+
+} 
+
+ 
+
+/* Style the “Add” button */ 
+
+.addBtn { 
+
+  Padding: 10px; 
+
+  Width: 25%; 
+
+  Background: #d9d9d9; 
+
+  Color: #555; 
+
+  Float: left; 
+
+  Text-align: center; 
+
+  Font-size: 16px; 
+
+  Cursor: pointer; 
+
+  Transition: 0.3s; 
+
+  Border-radius: 0; 
+
+} 
+
+ 
+
+.addBtn:hover { 
+
+  Background-color: #bbb; 
+
+} 
+
+</style> 
+
+</head> 
+
+<body> 
+
+ 
+
+<div id=”myDIV” class=”header”> 
+
+  <h2 style=”margin:5px”>My To Do List</h2> 
+
+  <input type=”text” id=”myInput” placeholder=”Title...”> 
+
+  <span onclick=”newElement()” class=”addBtn”>Add</span> 
+
+</div> 
+
+ 
+
+<ul id=”myUL”> 
+
+  <li>Hit the gym</li> 
+
+  <li class=”checked”>Pay bills</li> 
+
+  <li>Meet George</li> 
+
+  <li>Buy eggs</li> 
+
+  <li>Read a book</li> 
+
+  <li>Organize office</li> 
+
+</ul> 
+
+ 
+
+<script> 
+
+// Create a “close” button and append it to each list item 
+
+Var myNodelist = document.getElementsByTagName(“LI”); 
+
+Var i; 
+
+For (i = 0; i < myNodelist.length; i++) { 
+
+  Var span = document.createElement(“SPAN”); 
+
+  Var txt = document.createTextNode(“\u00D7”); 
+
+  Span.className = “close”; 
+
+  Span.appendChild(txt); 
+
+  myNodelist[i].appendChild(span); 
+
+} 
+
+ 
+
+// Click on a close button to hide the current list item 
+
+Var close = document.getElementsByClassName(“close”); 
+
+Var i; 
+
+For (i = 0; i < close.length; i++) { 
+
+  Close[i].onclick = function() { 
+
+    Var div = this.parentElement; 
+
+    div.style.display = “none”; 
+
+  } 
+
+} 
+
+ 
+
+// Add a “checked” symbol when clicking on a list item 
+
+Var list = document.querySelector(‘ul’); 
+
+List.addEventListener(‘click’, function(ev) { 
+
+  If (ev.target.tagName === ‘LI’) { 
+
+    Ev.target.classList.toggle(‘checked’); 
+
+  } 
+
+}, false); 
+
+ 
+
+// Create a new list item when clicking on the “Add” button 
+
+Function newElement() { 
+
+  Var li = document.createElement(“li”); 
+
+  Var inputValue = document.getElementById(“myInput”).value; 
+
+  Var t = document.createTextNode(inputValue); 
+
+  li.appendChild(t); 
+
+  if (inputValue === ‘’) { 
+
+    alert(“You must write something!”); 
+
+  } else { 
+
+    Document.getElementById(“myUL”).appendChild(li); 
+
+  } 
+
+  Document.getElementById(“myInput”).value = “”; 
+
+ 
+
+  Var span = document.createElement(“SPAN”); 
+
+  Var txt = document.createTextNode(“\u00D7”); 
+
+  Span.className = “close”; 
+
+  Span.appendChild(txt); 
+
+  li.appendChild(span); 
+
+ 
+
+  for (i = 0; i < close.length; i++) { 
+
+    close[i].onclick = function() { 
+
+      var div = this.parentElement; 
+
+      div.style.display = “none”; 
+
+    } 
+
+  } 
+
+} 
+
+</script> 
+
+ 
+
+</body> 
+
+</html> 
